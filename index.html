@@ -113,7 +113,7 @@ let x,y,xScale,yScale,width,height;
 
  let xTicks = (window.innerWidth < 768) ? 6: 12;
 
-width = 1200;
+width = 800;
 height = 500;
 const padding = 100;
 
@@ -125,16 +125,16 @@ const padding = 100;
  d3.max(dataset, function(d){return d.date;})
  
 ])
-  .range([padding, 1000]);
-//.range([padding, width]);
+
+.range([padding, width]);
 
 yScale = d3.scaleLinear()
 .domain([
 //0, d3.max(dataset, function(d){return d.value;})
 0, 100
 ])
-.range([300, padding]);
-//.range([height, padding]);
+//.range([300, padding]);
+.range([height, padding]);
 
 axisx = d3.axisBottom(xScale).ticks(xTicks).tickFormat(format);
 
