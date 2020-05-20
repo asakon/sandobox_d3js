@@ -6,10 +6,24 @@
   <title>テスト</title>
   <style>
     #chart--wrapper {
-      max-width: 100%;
-      margin: 0 auto;
-      min-height: 300px;
+            max-width: 100%;
+            position: relative;
+            margin: 0 auto;
+            padding-top: 40%;
+            min-height: 300px;
     }
+            #chart--wrapper svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+                .axis .domain{
+            stroke: #ccc;
+            position: relative;
+        }
   </style>
 </head>
 <body>
@@ -21,32 +35,69 @@ const contents = d3.select('#chart--wrapper');
 const svg = contents.append("svg");
 
 /* mod */
-const padding = 10;
+//const padding = 10;
 
 /* end mod */
-console.log(contents.node().clientWitdh);
-width = contents.node().clientWidth - padding;
+let x,y,xScale,yScale,width,height;
 
-height = contents.node().clientHeight -padding;
 
-let dataset = [
-  {
-    date: "2019/1/1",
-    value: 70
-  },
- {
-    date: "2019/2/1",
-    value: 20
-  },
-  {
-    date: "2019/3/1",
-    value: 100
-  },
-  {
-    date: "2019/4/1",
-    value: 30
-  },
-]
+
+// width = contents.node().clientWidth - padding;
+
+// height = contents.node().clientHeight - padding;
+
+
+        let dataset = [
+            {
+                date : "2019/1/1",
+                value : 70
+            },
+            {
+                date : "2019/2/1",
+                value : 65.1
+            },
+            {
+                date : "2019/3/1",
+                value : 81.6
+            },
+            {
+                date : "2019/4/1",
+                value : 55.3
+            },
+            {
+                date : "2019/5/1",
+                value : 30.6
+            },
+            {
+                date : "2019/6/1",
+                value : 55.4
+            },
+            {
+                date : "2019/7/1",
+                value : 72.9
+            },
+            {
+                date : "2019/8/1",
+                value : 82.2
+            },
+            {
+                date : "2019/9/1",
+                value : 66.4
+            },
+            {
+                date : "2019/10/1",
+                value : 73.3
+            },
+            {
+                date : "2019/11/1",
+                value : 25.4
+            },
+            {
+                date : "2019/12/1",
+                value : 57.4
+            }
+        ];
+
 
  let timeparser = d3.timeParse("%Y/%m/%d");
 
@@ -62,29 +113,38 @@ let dataset = [
 
  let xTicks = (window.innerWidth < 768) ? 6: 12;
 
+width = 1200;
+height = 500;
+const padding = 100;
+
  xScale = d3.scaleTime()
  
  .domain([
  
- d3.min(dataset, function(d){ return d.date;}), d3.max(dataset, function(d){return d.date;})
+ d3.min(dataset, function(d){ return d.date;}),
+ d3.max(dataset, function(d){return d.date;})
  
 ])
-  
-.range([padding, width]);
+  .range([padding, 1000]);
+//.range([padding, width]);
 
 yScale = d3.scaleLinear()
 .domain([
-0, d3.max(dataset, function(d){return d.value;})
+//0, d3.max(dataset, function(d){return d.value;})
+0, 100
 ])
-.range([height, padding]);
+.range([300, padding]);
+//.range([height, padding]);
 
 axisx = d3.axisBottom(xScale).ticks(xTicks).tickFormat(format);
 
 axisy = d3.axisLeft(yScale);
 
 x.attr("transform", "translate(" + 0 + "," + (height) + ")").call(axisx);
+//x.attr("transform", "translate(0, 300)").call(axisx);
 
-y.attr("transform", "translate(" + padding + "," + 0 + ")").call(axisy)
+y.attr("transform", "translate(" + padding + "," + 0 + ")").call(axisy);
+//y.attr("transform", "translate(20, 0)").call(axisy)
 
 </script>
 </body>
