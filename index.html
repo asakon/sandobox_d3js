@@ -132,7 +132,6 @@ yScale = d3.scaleLinear()
 .domain([
 0, d3.max(dataset, function(d){return d.value;})
 ])
-//.range([300, padding]);
 .range([height, padding]);
 
 axisx = d3.axisBottom(xScale).ticks(xTicks).tickFormat(format);
