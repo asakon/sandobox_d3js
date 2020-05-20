@@ -6,6 +6,67 @@
   <title>テスト</title>
 </head>
 <body>
-  <script src="drawGraph.js"></script>
+  <div id="chart--wrapper"></div>
+<script src="d3.js"></script>
+<script>
+
+const contents = d3.select('#chart--wrapper');
+const svg = contents.append("svg");
+
+/* mod */
+const padding = 10;
+
+/* end mod */
+console.log(contents.node().clientWitdh);
+width = contents.node().clientWidth - padding;
+
+height = contents.node().clientHeight -padding;
+
+let dataset = [
+  {
+    date: "2019/1/1",
+    value: 70
+  },
+]
+
+ let timeparser = d3.timeParse("%Y/%m/%d");
+
+ let format = d3.timeFormat("%Y/%m");
+
+ dataset = dataset.map(function (d) {
+  return { date: timeparser(d.date), value: d.value};
+ });
+
+ x = svg.append("g").attr("class", "axis axis-x")
+
+ y = svg.append("g").attr("class", "axis axis-y")
+
+ let xTicks = (window.innerWidth < 768) ? 6: 12;
+
+ xScale = d3.scaleTime()
+ 
+ .domain([
+ 
+ d3.min(dataset, function(d){ return d.date;}), d3.max(dataset, function(d){return d.date;})
+ 
+])
+  
+.range([padding, width]);
+
+yScale = d3.scaleLinear()
+.domain([
+0, d3.max(dataset, function(d){return d.value;})
+])
+.range([height, padding]);
+
+axisx = d3.axisBottom(xScale).ticks(xTicks).tickFormat(format);
+
+axisy = d3.axisLeft(yScale);
+
+x.attr("transform", "translate(" + 0 + "," + (height) + ")").call(axisx);
+
+y.attr("transform", "translate(" + padding + "," + 0 + ")").call(axisy)
+
+</script>
 </body>
 </html>
