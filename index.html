@@ -94,6 +94,11 @@ let x,y,xScale,yScale,width,height,line,path;
 
  let format = d3.timeFormat("%Y/%m");
 
+const lineChart = {
+    initialize : function() {
+
+    
+
  dataset = dataset.map(function (d) {
   return { date: timeparser(d.date), value: d.value};
  });
@@ -138,6 +143,9 @@ line = d3.line()
 .y(function(d) { return yScale(d.value); })
 
 path.datum(dataset).attr("fill", "none").attr("stroke", color).attr("d", line)
+    }
+};
+
 </script>
 </body>
 </html>
