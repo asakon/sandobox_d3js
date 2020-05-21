@@ -33,18 +33,9 @@
 
 const contents = d3.select('#chart--wrapper');
 const svg = contents.append("svg");
+let color = d3.rgb("#85a7cc");
 
-/* mod */
-//const padding = 10;
-
-/* end mod */
-let x,y,xScale,yScale,width,height;
-
-
-
-// width = contents.node().clientWidth - padding;
-
-// height = contents.node().clientHeight - padding;
+let x,y,xScale,yScale,width,height,line,path;
 
 
         let dataset = [
@@ -142,6 +133,11 @@ x.attr("transform", "translate(" + 0 + "," + (height) + ")").call(axisx);
 
 y.attr("transform", "translate(" + padding + "," + 0 + ")").call(axisy);
 
+line = d3.line()
+.x(function(d) { return xScale(d.date); })
+.y(function(d) { return yScale(d.value); })
+
+path.datum(dataset).attr("fill", "none").attr("stroke", color).attr("d", line)
 </script>
 </body>
 </html>
