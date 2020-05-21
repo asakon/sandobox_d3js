@@ -103,6 +103,8 @@ const lineChart = {
   return { date: timeparser(d.date), value: d.value};
  });
 
+path = svg.append("path");
+
  x = svg.append("g").attr("class", "axis axis-x")
 
  y = svg.append("g").attr("class", "axis axis-y")
